@@ -18,14 +18,15 @@
 //
 // If you modify this or use this, please don't delete my name and give me the credits
 // Greetings from Colombia :) 
+// Hardware port by ub4raf
 /****************************************************************************/
 
 #include <stdio.h>
 #include <stdint.h>
 #include <stdbool.h>
 //#include "mbed.h"
-#define NinebotHeader0 0x55
-#define NinebotHeader1 0xAA
+#define NinebotHeader0 0x5A//0x55
+#define NinebotHeader1 0xA5//0xAA
 #define Ninebotread 0x01
 #define Ninebotwrite 0x03
 #define NinebotMaxPayload 0x38
@@ -36,6 +37,7 @@ typedef struct {
     uint8_t RW;
     uint8_t len;
     uint8_t command;
+    uint8_t parameter;
     uint8_t data[NinebotMaxPayload];
     uint8_t CheckSum[2];
 } NinebotPack;
@@ -53,5 +55,5 @@ uint8_t ninebot_serialyze(NinebotPack *message, uint8_t *dataUART);
 
 //uint8_t *ninebot_slave_answer(NinebotPack *inmessage /*, NinebotPack *outmessage, uint8_t **dataUART*/,uint8_t *outsize);
 uint8_t ninebot_slave_answer(NinebotPack *inmessage, NinebotPack *outmessage);
-uint8_t ninebot_create_pack(uint8_t direction, uint8_t RW,uint8_t command, uint8_t len, uint8_t *payload, NinebotPack *message);
+uint8_t ninebot_create_pack(uint8_t direction, uint8_t RW,uint8_t command, uint8_t parameter, uint8_t len, uint8_t *payload, NinebotPack *message);
 uint8_t ninebot_create_request(uint8_t direction, uint8_t RW,uint8_t command, uint8_t len, NinebotPack *message);
