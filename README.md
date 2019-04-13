@@ -20,8 +20,15 @@ test code:
 
 while(1)
 {
+
   send_controls(desired_throttle,desired_brakes,!(question_counter));           // drive ESC
+  
     if(question_counter>0x03)   question_counter=0x00; else question_counter++; // every 4th ask current state (battery%, velocity, light, beep, etc)
+    
   ROM_ADCProcessorTrigger(ADC0_BASE, 3);                                        // state ADC conversion
+  
   ROM_SysCtlDelay(ROM_SysCtlClockGet()/20);                                     // WAIT...
+  
 }
+
+73deUb4raf
